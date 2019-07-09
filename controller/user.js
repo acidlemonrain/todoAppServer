@@ -7,6 +7,7 @@ router.post('/', (req, res) => {
 	console.log(req.body);
 	con.query(`SELECT * from user WHERE username ="${req.body.name}"`, function(error, results, fields) {
 		if (results.length == 0) {
+			console.log('没有这个用户');
 			res.json(null);
 			return 0;
 		}
@@ -24,12 +25,16 @@ router.post('/', (req, res) => {
 			res.json(token);
 		}
 		if (password != req.body.password) {
+			console.log('密码错误');
+
 			res.json(false);
 		}
 	});
 });
 //newuser
 router.post('/new', (req, res) => {
+	console.log(req.body);
+
 	con.query(`SELECT * from user WHERE username ="${req.body.name}"`, (e, r, f) => {
 		if (r.length >= 1) {
 			res.json(false);
@@ -48,6 +53,8 @@ router.post('/new', (req, res) => {
 						'hyc'
 					);
 					res.json(token);
+				} else {
+					res.json(false);
 				}
 			});
 		}
