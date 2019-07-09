@@ -6,6 +6,15 @@ router.get('/:id', function(req, res, next) {
 		res.json(results);
 	});
 });
+router.get('/rm/:id', function(req, res, next) {
+	console.log('sada');
+
+	con.query('delete from todo where id =' + req.params.id, function(error, results, fields) {
+		if (!error) {
+			res.json(true);
+		}
+	});
+});
 router.post('/new', auth, (req, res) => {
 	const client = req.body;
 	delete client.token;
