@@ -18,10 +18,16 @@ router.get('/rm/:id', function(req, res, next) {
 router.post('/new', auth, (req, res) => {
 	const client = req.body;
 	delete client.token;
+	console.log(client);
+
 	con.query('INSERT INTO todo SET ?', client, (err) => {
-		if (err) {
+		if (!err) {
+			console.log('成功插入');
+			res.json(true);
 		} else {
-			res.json('success');
+			res.json(false);
+			console.log('有问题 todo插入');
+			console.log(err);
 		}
 	});
 });

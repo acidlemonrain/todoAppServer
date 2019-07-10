@@ -38,7 +38,6 @@ router.post('/new', auth, (req, res) => {
 router.post('/privacy/:id', auth, (req, res) => {
 	const listid = req.params.id;
 	console.log(req.body.value);
-
 	const value = Number(req.body.value);
 	con.query(`UPDATE todolist	SET public = ${value} WHERE id = ${listid}`, (e, r, f) => {
 		if (!e) {
