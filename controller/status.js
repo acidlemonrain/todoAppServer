@@ -14,11 +14,37 @@ function trans(a) {
 		value: value
 	};
 }
+function transauthor(a) {
+	var author = [];
+	var value = [];
+	a.forEach((element) => {
+		author.push(element.username);
+		value.push(element.value);
+	});
+	return {
+		author: author,
+		value: value
+	};
+}
 
 router.get('/bydate', (req, res) => {
 	con.query(`SELECT  deadline,COUNT(1) as value   FROM  todo  GROUP BY deadline`, (e, r, f) => {
 		res.json(trans(r));
 	});
+});
+
+router.get('/byauthor', (req, res) => {
+	console.log('byauthor api work');
+
+	con.query(
+		`SELECT  username,COUNT(1) as value FROM todolist , user
+    WHERE todolist.userid = user.id
+    GROUP BY userid
+    ORDER BY COUNT(1) DESC;`,
+		(e, r, f) => {
+			res.json(transauthor(r));
+		}
+	);
 });
 
 module.exports = router;
