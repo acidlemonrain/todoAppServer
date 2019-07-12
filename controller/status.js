@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var con = require('../database');
 var auth = require('./auth');
-
 function trans(a) {
 	var deadline = [];
 	var value = [];
@@ -42,6 +41,8 @@ router.get('/byauthor', (req, res) => {
     GROUP BY userid
     ORDER BY COUNT(1) DESC;`,
 		(e, r, f) => {
+			console.log(r);
+
 			res.json(transauthor(r));
 		}
 	);

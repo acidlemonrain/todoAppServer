@@ -21,6 +21,7 @@ router.get('/:id', function(req, res, next) {
 });
 //new
 router.post('/new', auth, (req, res) => {
+
 	const info = {
 		userid: req.user.userid,
 		name: req.body.name,
