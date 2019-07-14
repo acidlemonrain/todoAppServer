@@ -4,8 +4,8 @@ const tree = require('./utils/tree');
 const auth = require('./auth');
 
 //所有笔记
-router.get('/', (req, res) => {
-	con.query('select * from tree where userid =' + id, (e, r, f) => {
+router.get('/all', (req, res) => {
+	con.query('select * from tree ', (e, r, f) => {
 		if (e) {
 			console.log(e);
 			res.json(false);
