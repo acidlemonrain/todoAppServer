@@ -3,6 +3,18 @@ var con = require('../database');
 const tree = require('./utils/tree');
 const auth = require('./auth');
 
+//所有笔记
+router.get('/', (req, res) => {
+	con.query('select * from tree where userid =' + id, (e, r, f) => {
+		if (e) {
+			console.log(e);
+			res.json(false);
+		} else {
+			res.json(r);
+		}
+	});
+});
+
 //我所有的笔记目录
 router.post('/all', auth, function(req, res) {
 	const id = req.user.userid;
